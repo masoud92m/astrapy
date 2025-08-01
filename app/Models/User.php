@@ -3,10 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -20,8 +20,16 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        'age',
+        'mobile',
+        'updated_at',
+        'created_at',
+        'telegram_id',
+        'subscription_started_at',
+        'subscription_expires_at',
+        'is_admin',
         'password',
+        'terms_accepted_at',
     ];
 
     /**
@@ -47,15 +55,13 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * Get the user's initials
-     */
-    public function initials(): string
+    public function dmo()
     {
-        return Str::of($this->name)
-            ->explode(' ')
-            ->take(2)
-            ->map(fn ($word) => Str::substr($word, 0, 1))
-            ->implode('');
+        return $this->hasMany(Dmo::class);
+    }
+
+    public function podcasts()
+    {
+        return $this->belongsToMany(Podcast::class, 'user_podcast');
     }
 }

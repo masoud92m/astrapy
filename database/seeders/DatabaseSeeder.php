@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,9 +17,14 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        User::create([
+            'name' => 'مسعود محمدی',
+            'age' => 33,
+            'mobile' => '09372869339',
+            'mobile_verified_at' => Carbon::now(),
+            'is_admin' => true,
         ]);
+
+        $this->call(PostsSeeder::class);
     }
 }
