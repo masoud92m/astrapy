@@ -24,7 +24,5 @@ class DatabaseSeeder extends Seeder
             'mobile_verified_at' => Carbon::now(),
             'is_admin' => true,
         ]);
-
-        $this->call(PostsSeeder::class);
     }
 }

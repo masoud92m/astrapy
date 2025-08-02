@@ -7,3 +7,5 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.Swal = Swal;
 const url = window.location;
 window.basePath = url.protocol + '//' + url.host + url.pathname;
+
+import './login.js';
