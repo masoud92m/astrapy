@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\Gender;
+use App\Enums\Relationship;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,6 +15,11 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $casts = [
+        'gender'       => Gender::class,
+        'relationship_status' => Relationship::class,
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,16 +27,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'age',
         'mobile',
         'updated_at',
         'created_at',
-        'telegram_id',
-        'subscription_started_at',
-        'subscription_expires_at',
-        'is_admin',
-        'password',
-        'terms_accepted_at',
+        'gender',
+        'relationship',
+        'dob',
     ];
 
     /**
