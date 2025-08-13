@@ -5,7 +5,7 @@
     ]))
     <div class="bg-white p-6 rounded shadow-lg">
         <h2 class="text-xl font-bold mb-4">@yield('title')</h2>
-        <form action="{{ route('users.update', $item->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('admin.users.update', $item->id) }}" method="post" enctype="multipart/form-data">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div>
                     @csrf

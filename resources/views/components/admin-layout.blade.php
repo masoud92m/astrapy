@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'پنل مدیریت')</title>
-    @routes
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('assets/jalalidatepicker/jalalidatepicker.min.css') }}">
     <style>
         .transition-width {
             transition: width 0.3s ease-in-out;
@@ -37,7 +37,7 @@
         <div class="bg-white shadow p-4 flex justify-between items-center">
             <button onclick="toggleSidebar()" class="bg-gray-800 hover:bg-gray-600 text-white px-4 py-2 rounded cursor-pointer">☰</button>
             <div>
-                <a href="{{ route('logout') }}" class="bg-blue-600 text-white px-4 py-1 rounded cursor-pointer">خروج</a>
+                <a href="{{ route('admin.logout') }}" class="bg-blue-600 text-white px-4 py-1 rounded cursor-pointer">خروج</a>
             </div>
         </div>
 
@@ -47,10 +47,14 @@
     </div>
 </div>
 
+<script type="text/javascript" src="{{ asset('assets/jalalidatepicker/jalalidatepicker.min.js') }}"></script>
 <script>
     function toggleSidebar() {
         document.getElementById('sidebar').classList.toggle('sidebar-collapsed');
     }
+</script>
+<script>
+    jalaliDatepicker.startWatch();
 </script>
 @stack('scripts')
 </body>

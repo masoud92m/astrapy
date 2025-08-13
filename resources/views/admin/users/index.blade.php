@@ -1,11 +1,11 @@
 <x-admin-layout>
     @section('title', __('Users'))
-    <form action="{{ route('users.index') }}" id="filter-form"></form>
+    <form action="{{ route('admin.users.index') }}" id="filter-form"></form>
     <div class="bg-white p-6 rounded shadow-lg">
         <div class="flex items-center w-full">
             <h2 class="text-xl font-bold mb-4">@yield('title')</h2>
             <div class="ms-auto">
-                <a href="{{ route('users.create') }}"
+                <a href="{{ route('admin.users.create') }}"
                    class="bg-blue-600 text-white px-4 py-1 rounded">@lang('Create')</a>
             </div>
         </div>
@@ -47,7 +47,7 @@
                     <td class="border border-gray-300 p-2">{{ $item->mobile }}</td>
                     <td class="border border-gray-300 p-2">{{ $item->is_admin ? 'بله' : 'خیر' }}</td>
                     <td class="border border-gray-300 p-2">
-                        <a href="{{ route('users.edit', $item->id) }}"
+                        <a href="{{ route('admin.users.edit', $item->id) }}"
                            class="bg-blue-600 text-white px-4 py-1 rounded">@lang('Edit')</a>
                     </td>
                 </tr>

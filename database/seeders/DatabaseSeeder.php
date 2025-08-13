@@ -19,10 +19,11 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'مسعود محمدی',
-            'age' => 33,
             'mobile' => '09372869339',
             'mobile_verified_at' => Carbon::now(),
             'is_admin' => true,
         ]);
+
+        $this->call(PackagesSeeder::class);
     }
 }

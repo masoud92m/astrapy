@@ -12,15 +12,16 @@ class AdminController extends Controller
 {
     private function respondentsChart()
     {
-        $items = DB::table('respondents')
-            ->select([
-                DB::raw('date(created_at) as date'),
-                DB::raw('count(1) as c')
-            ])
-            ->groupByRaw('date(created_at)')
-            ->get()
-            ->keyBy('date')
-            ->toArray();
+//        $items = DB::table('respondents')
+//            ->select([
+//                DB::raw('date(created_at) as date'),
+//                DB::raw('count(1) as c')
+//            ])
+//            ->groupByRaw('date(created_at)')
+//            ->get()
+//            ->keyBy('date')
+//            ->toArray();
+        $items = [];
 
         $label = [];
         $data = [];

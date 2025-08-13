@@ -32,10 +32,10 @@
             <form wire:submit.prevent="submit" class="space-y-4">
                 <div>
                     <label class="block mb-1 text-sm">نام و نام خانوادگی</label>
-                    <input type="text" wire:model.defer="full_name"
+                    <input type="text" wire:model.defer="name"
                            class="w-full rounded-xl bg-neutral-800 border border-neutral-700 focus:border-yellow-500 focus:ring-0 p-3"
                            placeholder="مثلاً: نگار محمدی">
-                    @error('full_name') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+                    @error('name') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -72,7 +72,8 @@
                 </div>
 
                 <div class="flex items-center justify-between pt-2">
-                    <button type="button" class="px-4 py-2 text-sm text-gray-300 hover:text-white cursor-pointer" wire:click="skip">
+                    <button type="button" class="px-4 py-2 text-sm text-gray-300 hover:text-white cursor-pointer"
+                            wire:click="skip">
                         بعداً تکمیل می‌کنم
                     </button>
                     <button type="submit"

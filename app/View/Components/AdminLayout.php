@@ -26,56 +26,16 @@ class AdminLayout extends Component
         $menu = [
             [
                 'title' => 'Dashboard',
-                'route' => 'dashboard',
+                'route' => 'admin.dashboard',
             ],
             [
                 'title' => 'Users',
-                'route' => 'users.index',
+                'route' => 'admin.users.index',
             ],
             [
-                'title' => 'Instructors',
-                'route' => 'instructors.index',
-            ],
-            [
-                'title' => 'Respondents',
-                'route' => 'respondents.index',
-            ],
-            [
-                'title' => 'Podcasts',
-                'route' => 'podcasts.index',
-            ],
-            [
-                'title' => 'Thanksgivings',
-                'route' => 'thanksgivings.index',
-            ],
-            [
-                'title' => 'Meditations',
-                'route' => 'meditations.index',
-            ],
-            [
-                'title' => 'Yoga',
-                'route' => 'yoga.index',
-            ],
-            [
-                'title' => 'Smart nutrition',
-                'route' => 'smart-nutrition.index',
-            ],
-            [
-                'title' => 'Setting goals',
-                'route' => 'setting-goals.index',
-            ],
-            [
-                'title' => 'Feel good exercises',
-                'route' => 'feel-good-exercises.index',
-            ],
-            [
-                'title' => 'Mind digital detox',
-                'route' => 'mind-digital-detox.index',
-            ],
-            [
-                'title' => 'Charisma social skills',
-                'route' => 'charisma-social-skills.index',
-            ],
+                'title' => 'دریافت تحلیل',
+                'route' => 'admin.get-analysis',
+            ]
         ];
 
         foreach ($menu as &$menu_item) {

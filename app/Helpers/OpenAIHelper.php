@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Http;
 
 class OpenAIHelper
 {
-    public static function chat(array $messages, string $model = 'gpt-3.5-turbo'): string
+    public static function chat(array $messages, string $model = 'gpt-4o', int $max_tokens = 8192): string
     {
         if (env('OPENAI_DEVELOPER_MODE', false)) {
             return self::fakeResponse($messages);
@@ -17,6 +17,7 @@ class OpenAIHelper
                 'model' => $model,
                 'messages' => $messages,
                 'temperature' => 0.7,
+                'max_tokens' => 100,
             ]);
 
         return $response->json('choices.0.message.content');

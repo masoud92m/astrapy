@@ -10,7 +10,7 @@ class Modal extends Component
 {
     public $show = true;
 
-    public $full_name = '';
+    public $name = '';
     public $dob = '';
     public $gender = '';
     public $relationship = '';
@@ -18,26 +18,26 @@ class Modal extends Component
     protected function rules()
     {
         return [
-            'full_name'    => 'required|string|min:3',
-            'dob'          => ['required', 'regex:/^14\d{2}\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/'],
-            'gender'       => 'required|integer|in:' . implode(',', Gender::values()),
+            'name' => 'required|string|min:3',
+            'dob' => ['required', 'regex:/^14\d{2}\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/'],
+            'gender' => 'required|integer|in:' . implode(',', Gender::values()),
             'relationship' => 'required|integer|in:' . implode(',', Relationship::values()),
         ];
     }
 
     protected $messages = [
-        'full_name.required'    => 'نام و نام خانوادگی الزامی است.',
-        'full_name.string'      => 'نام و نام خانوادگی باید متن باشد.',
-        'full_name.min'         => 'نام و نام خانوادگی باید حداقل ۳ کاراکتر باشد.',
+        'name.required' => 'نام و نام خانوادگی الزامی است.',
+        'name.string' => 'نام و نام خانوادگی باید متن باشد.',
+        'name.min' => 'نام و نام خانوادگی باید حداقل ۳ کاراکتر باشد.',
 
-        'dob.required'          => 'تاریخ تولد الزامی است.',
-        'dob.regex'             => 'تاریخ تولد باید به فرمت ۱۴۰۰/۰۱/۰۱ باشد.',
+        'dob.required' => 'تاریخ تولد الزامی است.',
+        'dob.regex' => 'تاریخ تولد باید به فرمت ۱۴۰۰/۰۱/۰۱ باشد.',
 
-        'gender.required'       => 'انتخاب جنسیت الزامی است.',
-        'gender.in'             => 'جنسیت انتخاب شده معتبر نیست.',
+        'gender.required' => 'انتخاب جنسیت الزامی است.',
+        'gender.in' => 'جنسیت انتخاب شده معتبر نیست.',
 
         'relationship.required' => 'انتخاب وضعیت رابطه الزامی است.',
-        'relationship.in'       => 'وضعیت رابطه انتخاب شده معتبر نیست.',
+        'relationship.in' => 'وضعیت رابطه انتخاب شده معتبر نیست.',
     ];
 
     public function mount()
@@ -56,7 +56,7 @@ class Modal extends Component
         $this->validate();
 
         session(['onboarding_data' => [
-            'full_name'    => $this->full_name,
+            'name'    => $this->name,
             'dob'          => $this->dob,
             'gender'       => $this->gender,
             'relationship' => $this->relationship,
