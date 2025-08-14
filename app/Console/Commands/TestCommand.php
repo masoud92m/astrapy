@@ -3,6 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Helpers\OpenAIHelper;
+use App\Models\Analysis;
+use App\Models\AnalysisAnswers;
+use App\Models\Package;
 use Illuminate\Console\Command;
 
 class TestCommand extends Command
@@ -26,11 +29,10 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        $prompt = 'سلام چه خبره؟';
-        $messages = [
-            ['role' => 'user', 'content' => $prompt],
-        ];
-        $r = OpenAIHelper::chat($messages);
-        dd($r);
+        $package_id = 2;
+        $package = Package::find($package_id);
+        $questions = $package->questions->pluck('content', 'id')->toArray();
+        dd($questions);
+
     }
 }

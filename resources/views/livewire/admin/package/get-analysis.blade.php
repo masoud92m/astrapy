@@ -1,6 +1,6 @@
-<div class="mt-3" x-data="{submitting : false}">
+<div class="mt-3 min-h-[calc(100vh-200px)]" x-data="{submitting : false}">
     <form>
-        <div>
+        <div class="mb-3">
             <label class="block mb-1 text-sm">پکیج</label>
             <select wire:model.change="package_id"
                     class="w-full rounded-sm border border-gray-700 focus:border-gray-500 focus:ring-0 p-2">
@@ -12,7 +12,7 @@
             @error('package_id') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
         </div>
         @if($package_id)
-            <div>
+            <div class="mb-3">
                 <label class="block mb-1 text-sm">نام و نام خانوادگی</label>
                 <input type="text" wire:model.defer="name"
                        class="w-full rounded-sm border border-gray-700 focus:border-gray-500 focus:ring-0 p-2"
@@ -20,7 +20,7 @@
                 @error('name') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
                 <div>
                     <label class="block mb-1 text-sm">تاریخ تولد</label>
                     <input type="text" wire:model.defer="dob"
@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <div>
+            <div class="mb-3">
                 <label class="block mb-1 text-sm">وضعیت رابطه</label>
                 <select wire:model.defer="relationship"
                         class="w-full rounded-sm border border-gray-700 focus:border-gray-500 focus:ring-0 p-2">
@@ -54,7 +54,7 @@
             </div>
 
             @foreach($questions as $question)
-                <div>
+                <div class="mb-3">
                     <label class="block mb-1 text-sm">{{ $question->content }}</label>
                     <input type="text" wire:model.defer="answers.{{ $question->id }}"
                            class="w-full rounded-sm border border-gray-700 focus:border-gray-500 focus:ring-0 p-2"
@@ -65,9 +65,10 @@
             @endforeach
 
             <div class="flex items-center justify-between pt-2">
-                <button type="submit"
-                        class="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer rounded-sm disabled:opacity-50 disabled:cursor-not-allowed"
-                        x-on:click="
+                <div class="flex items-center">
+                    <button type="submit"
+                            class="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer rounded-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                            x-on:click="
                             if (submitting) return;
                             submitting = true;
                             $wire.submit()
@@ -75,10 +76,14 @@
                                 submitting = false;
                             });
                         "
-                        :disabled="submitting"
-                >
-                    دریافت تحلیل
-                </button>
+                            :disabled="submitting"
+                    >
+                        دریافت تحلیل
+                    </button>
+                    <div x-show="submitting" class="mr-2 mt-1">
+                        <span class="loader"></span>
+                    </div>
+                </div>
                 <button
                     type="button"
                     :disabled="submitting"

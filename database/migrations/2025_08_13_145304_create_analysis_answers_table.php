@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('analysis_answers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('analysis_id')->constrained();
-            $table->foreignId('question_id')->constrained();
+            $table->foreignId('package_question_id')->constrained();
             $table->text('content');
             $table->timestamps();
         });

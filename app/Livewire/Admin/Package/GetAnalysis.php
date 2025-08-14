@@ -5,7 +5,9 @@ namespace App\Livewire\Admin\Package;
 use App\Enums\Gender;
 use App\Enums\Relationship;
 use App\Helpers\OpenAIHelper;
+use App\Models\Analysis;
 use App\Models\Package;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
@@ -21,7 +23,7 @@ class GetAnalysis extends Component
     public $relationship = '2';
 
     public $answers = [];
-    public $response = '' ;
+    public $response = '';
 
     protected function rules()
     {
@@ -51,55 +53,57 @@ class GetAnalysis extends Component
         ]);
     }
 
-    public function updated()
+    public function updatedPackageId($value)
     {
+        $this->emptyForm();
         $this->questions = Package::find($this->package_id)->questions;
+    }
+
+    protected function emptyForm()
+    {
+//        $this->name = '';
+//        $this->dob = '';
+//        $this->gender = '';
+//        $this->relationship = '';
+        $this->answers = [];
+        $this->response = '';
     }
 
     public function new()
     {
         $this->package_id = '';
-        $this->name = '';
-        $this->dob = '';
-        $this->gender = '';
-        $this->relationship = '';
-        $this->answers = [];
+        $this->emptyForm();
     }
 
     public function submit()
     {
         $this->validate();
-
-        $package = Package::find($this->package_id);
-
         $info = [
-            'نام' => $this->name,
-            'تاریخ تولد شمسی' => $this->dob,
-            'جنسیت' => Gender::labelFor($this->gender),
-            'وضعیت رابطه' => Relationship::labelFor($this->relationship),
+            'name' => $this->name,
+            'dob' => $this->dob,
+            'gender' => Gender::labelFor($this->gender),
+            'relationship' => Relationship::labelFor($this->relationship),
         ];
 
-        $prompt = [];
-        $prompt[] = $package->prompt1;
-        $prompt[] = 'اطلاعات اولیه موردنیاز:';
-
-        foreach ($info as $key => $value) {
-            $prompt[] = $key . ': ' . $value;
+        $r = OpenAIHelper::getAnalysis($this->package_id, $info, $this->answers);
+        if ($r['status']) {
+            $analysis = Analysis::create([
+                'package_id' => $this->package_id,
+                'name' => $this->name,
+                'dob' => $this->dob,
+                'gender' => $this->gender,
+                'relationship' => $this->relationship,
+                'causer_id' => Auth::id(),
+                'prompt' => $r['data']['prompt'],
+                'analysis' => $r['data']['analysis'],
+            ]);
+            foreach ($this->answers as $key => $value) {
+                $analysis->answers()->create([
+                    'package_question_id' => $key,
+                    'content' => $value,
+                ]);
+            }
+            $this->response = $r['data']['analysis'];
         }
-
-        $questions = $this->questions->pluck('content', 'id')->toArray();
-        foreach ($this->answers as $key => $value) {
-            $prompt[] = $questions[$key] . ': ' . $value;
-        }
-
-        $prompt[] = $package->prompt2;
-        $content = implode("\n", $prompt);
-//        dd($content);
-        $messages = [
-            ['role' => 'system', 'content' => 'طبق توضیحاتی که در اماده میاد، میخوام یه متن برای برای یه پکیج آسترولوژی بنویسی، دقت کن این روانشناسی نیست به هیچ وجه، لطفا فقط متن رو بنویس و هیچ توضیح اضافه در اول یا در آخر نده'],
-            ['role' => 'user', 'content' => $content],
-        ];
-        ini_set('max_execution_time', 60);
-        $this->response = OpenAIHelper::chat($messages, max_tokens: 500);
     }
 }

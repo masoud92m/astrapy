@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('analyses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('package_id')->constrained();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('causer_id')->on('users')->references('id')->onDelete('set null');
+            $table->foreignId('package_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('causer_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('name')->nullable();
             $table->unsignedTinyInteger('gender')->nullable();
             $table->unsignedTinyInteger('relationship')->nullable();

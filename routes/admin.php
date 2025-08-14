@@ -14,6 +14,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\AdminController::class, 'dashboard'])->name('dashboard');
         Route::get('logout', [\App\Http\Controllers\Admin\AdminController::class, 'logout'])->name('logout');
         Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
-        Route::get('get-result', [PackageController::class, 'getAnalysis'])->name('get-analysis');
+        Route::get('get-analysis', [PackageController::class, 'getAnalysis'])->name('get-analysis');
     });
 });
