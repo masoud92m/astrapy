@@ -33,6 +33,7 @@ class User extends Authenticatable
         'gender',
         'relationship',
         'dob',
+        'is_admin',
     ];
 
     /**
@@ -58,13 +59,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function dmo()
+    public function permissions()
     {
-        return $this->hasMany(Dmo::class);
-    }
-
-    public function podcasts()
-    {
-        return $this->belongsToMany(Podcast::class, 'user_podcast');
+        return $this->belongsToMany(Permission::class, 'user_permissions');
     }
 }

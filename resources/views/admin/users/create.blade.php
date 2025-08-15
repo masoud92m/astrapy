@@ -10,7 +10,7 @@
                     @csrf
                     @method('POST')
                     <div class="mb-4">
-                        <label class="block font-bold" for="mobile">موبایل / نام کاربری</label>
+                        <label class="block font-bold" for="mobile">موبایل</label>
                         <input type="text" id="mobile" class="w-1xl p-2 border rounded" name="mobile"
                                value="{{ old('mobile') }}">
                         @error('mobile')
@@ -28,47 +28,29 @@
                     </div>
 
                     <div class="mb-4">
-                        <label class="block font-bold" for="age">سن</label>
-                        <input type="number" id="age" class="w-1xl p-2 border rounded" name="age"
-                               value="{{ old('age') }}">
-                        @error('age')
+                        <label class="block font-bold" for="dob">تاریخ تولد</label>
+                        <input type="text" id="dob" class="w-1xl p-2 border rounded" name="dob"
+                               value="{{ old('dob') }}" data-jdp>
+                        @error('dob')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <div class="mb-4">
-                        <label class="block font-bold" for="password">پسورد (اختیاری)</label>
-                        <input type="text" id="password" class="w-1xl p-2 border rounded" name="password">
-                        @error('password')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
+                    {{--                    <div class="mb-4">--}}
+                    {{--                        <label class="block font-bold" for="password">پسورد (اختیاری)</label>--}}
+                    {{--                        <input type="text" id="password" class="w-1xl p-2 border rounded" name="password">--}}
+                    {{--                        @error('password')--}}
+                    {{--                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>--}}
+                    {{--                        @enderror--}}
+                    {{--                    </div>--}}
 
-                    <div class="mb-4">
-                        <label class="block font-bold" for="password_confirmation">تکرار پسورد</label>
-                        <input type="text" id="password_confirmation" class="w-1xl p-2 border rounded" name="password_confirmation">
-                        @error('password_confirmation')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block font-bold" for="subscription_started_at">شروع اشتراک</label>
-                        <input type="text" id="subscription_started_at" class="w-1xl p-2 border rounded"
-                               name="subscription_started_at" value="{{ old('subscription_started_at') }}" data-jdp>
-                        @error('subscription_started_at')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block font-bold" for="subscription_expires_at">پایان اشتراک</label>
-                        <input type="text" id="subscription_expires_at" class="w-1xl p-2 border rounded"
-                               name="subscription_expires_at" value="{{ old('subscription_expires_at') }}" data-jdp>
-                        @error('subscription_expires_at')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
+                    {{--                    <div class="mb-4">--}}
+                    {{--                        <label class="block font-bold" for="password_confirmation">تکرار پسورد</label>--}}
+                    {{--                        <input type="text" id="password_confirmation" class="w-1xl p-2 border rounded" name="password_confirmation">--}}
+                    {{--                        @error('password_confirmation')--}}
+                    {{--                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>--}}
+                    {{--                        @enderror--}}
+                    {{--                    </div>--}}
 
                     <button class="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer">ذخیره</button>
                 </div>
@@ -77,21 +59,33 @@
                         <p class="block font-bold mb-2">دسترسی</p>
                         <label class="flex items-center mb-1 cursor-pointer">
                             <input type="checkbox" class="ml-1" name="is_admin" value="1"
-                                    {{ old('is_admin') ? 'checked' : '' }}>
+                                {{ old('is_admin') ? 'checked' : '' }}>
                             <span>ادمین</span>
                         </label>
+                        <div id="permission_list">
+                            @can('users.edit.permissions')
+                                @foreach($permissions as $permission)
+                                    <label class="flex items-center mb-1 cursor-pointer">
+                                        <input type="checkbox" class="ml-1" name="permissions[]"
+                                               value="{{ $permission->id }}"
+                                            {{ in_array($permission->id, old('permissions', [])) ? 'checked' : '' }}>
+                                        <span>{{ $permission->label }}</span>
+                                    </label>
+                                @endforeach
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div>
                     <div class="mb-4">
-                        <p class="block font-bold mb-2">پادکست ها</p>
-                        @foreach(\App\Models\Podcast::get() as $podcast)
-                            <label class="flex items-center mb-1 cursor-pointer">
-                                <input type="checkbox" class="ml-1" name="podcasts[]" value="{{ $podcast->id }}"
-                                    {{ in_array($podcast->id, old('podcasts', [])) ? 'checked' : '' }}>
-                                <span>{{ $podcast->title }}</span>
-                            </label>
-                        @endforeach
+                        {{--                        <p class="block font-bold mb-2">پادکست ها</p>--}}
+                        {{--                        @foreach(\App\Models\Podcast::get() as $podcast)--}}
+                        {{--                            <label class="flex items-center mb-1 cursor-pointer">--}}
+                        {{--                                <input type="checkbox" class="ml-1" name="podcasts[]" value="{{ $podcast->id }}"--}}
+                        {{--                                    {{ in_array($podcast->id, old('podcasts', [])) ? 'checked' : '' }}>--}}
+                        {{--                                <span>{{ $podcast->title }}</span>--}}
+                        {{--                            </label>--}}
+                        {{--                        @endforeach--}}
                     </div>
                 </div>
             </div>

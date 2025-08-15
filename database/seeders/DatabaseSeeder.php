@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
         ]);
 
+        $this->call(PermissionsSeeder::class);
         $this->call(PackagesSeeder::class);
     }
 }

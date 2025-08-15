@@ -30,49 +30,29 @@
                     </div>
 
                     <div class="mb-4">
-                        <label class="block font-bold" for="age">سن</label>
-                        <input type="number" id="age" class="w-1xl p-2 border rounded" name="age"
-                               value="{{ old('age', $item->age) }}">
-                        @error('age')
+                        <label class="block font-bold" for="dob">تاریخ تولد</label>
+                        <input type="number" id="dob" class="w-1xl p-2 border rounded" name="dob"
+                               value="{{ old('dob', $item->dob) }}" data-jdp>
+                        @error('dob')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <div class="mb-4">
-                        <label class="block font-bold" for="password">پسورد (اختیاری)</label>
-                        <input type="text" id="password" class="w-1xl p-2 border rounded" name="password">
-                        @error('password')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
+                    {{--                    <div class="mb-4">--}}
+                    {{--                        <label class="block font-bold" for="password">پسورد (اختیاری)</label>--}}
+                    {{--                        <input type="text" id="password" class="w-1xl p-2 border rounded" name="password">--}}
+                    {{--                        @error('password')--}}
+                    {{--                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>--}}
+                    {{--                        @enderror--}}
+                    {{--                    </div>--}}
 
-                    <div class="mb-4">
-                        <label class="block font-bold" for="password_confirmation">تکرار پسورد</label>
-                        <input type="text" id="password_confirmation" class="w-1xl p-2 border rounded" name="password_confirmation">
-                        @error('password_confirmation')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block font-bold" for="subscription_started_at">شروع اشتراک</label>
-                        <input type="text" id="subscription_started_at" class="w-1xl p-2 border rounded"
-                               name="subscription_started_at"
-                               value="{{ old('subscription_started_at', $item->subscription_started_at) }}" data-jdp>
-                        @error('subscription_started_at')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block font-bold" for="subscription_expires_at">پایان اشتراک</label>
-                        <input type="text" id="subscription_expires_at" class="w-1xl p-2 border rounded"
-                               name="subscription_expires_at"
-                               value="{{ old('subscription_expires_at', $item->subscription_expires_at) }}" data-jdp>
-                        @error('subscription_expires_at')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
+                    {{--                    <div class="mb-4">--}}
+                    {{--                        <label class="block font-bold" for="password_confirmation">تکرار پسورد</label>--}}
+                    {{--                        <input type="text" id="password_confirmation" class="w-1xl p-2 border rounded" name="password_confirmation">--}}
+                    {{--                        @error('password_confirmation')--}}
+                    {{--                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>--}}
+                    {{--                        @enderror--}}
+                    {{--                    </div>--}}
 
                     <button class="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer">ذخیره</button>
                 </div>
@@ -84,23 +64,35 @@
                                 {{ old('is_admin', $item->is_admin ?? false) ? 'checked' : '' }}>
                             <span>ادمین</span>
                         </label>
+                        <div id="permission_list">
+                            @can('users.edit.permissions')
+                                @foreach($permissions as $permission)
+                                    <label class="flex items-center mb-1 cursor-pointer">
+                                        <input type="checkbox" class="ml-1" name="permissions[]"
+                                               value="{{ $permission->id }}"
+                                            {{ in_array($permission->id, old('permissions', $user_permissions)) ? 'checked' : '' }}>
+                                        <span>{{ $permission->label }}</span>
+                                    </label>
+                                @endforeach
+                            @endcan
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <div class="mb-4">
-                        <p class="block font-bold mb-2">پادکست ها</p>
-                        @php
-                            $userPodcastIds = $item->podcasts->pluck('id')->toArray();
-                        @endphp
-                        @foreach(\App\Models\Podcast::get() as $podcast)
-                            <label class="flex items-center mb-1 cursor-pointer">
-                                <input type="checkbox" class="ml-1" name="podcasts[]" value="{{ $podcast->id }}"
-                                    {{ in_array($podcast->id, old('podcasts', $userPodcastIds)) ? 'checked' : '' }}>
-                                <span>{{ $podcast->title }}</span>
-                            </label>
-                        @endforeach
-                    </div>
-                </div>
+                {{--                <div>--}}
+                {{--                    <div class="mb-4">--}}
+                {{--                        <p class="block font-bold mb-2">پادکست ها</p>--}}
+                {{--                        @php--}}
+                {{--                            $userPodcastIds = $item->podcasts->pluck('id')->toArray();--}}
+                {{--                        @endphp--}}
+                {{--                        @foreach(\App\Models\Podcast::get() as $podcast)--}}
+                {{--                            <label class="flex items-center mb-1 cursor-pointer">--}}
+                {{--                                <input type="checkbox" class="ml-1" name="podcasts[]" value="{{ $podcast->id }}"--}}
+                {{--                                    {{ in_array($podcast->id, old('podcasts', $userPodcastIds)) ? 'checked' : '' }}>--}}
+                {{--                                <span>{{ $podcast->title }}</span>--}}
+                {{--                            </label>--}}
+                {{--                        @endforeach--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
             </div>
         </form>
     </div>

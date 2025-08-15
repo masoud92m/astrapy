@@ -73,11 +73,7 @@ class OpenAIHelper
             $prompt[] = $info_items[$key] . ': ' . $value;
         }
 
-        Log::debug($package_id . json_encode($answers));
         foreach ($answers as $key => $value) {
-            if(!isset($questions[$key])){
-                continue;
-            }
             $prompt[] = $questions[$key] . ': ' . $value;
         }
 

@@ -55,8 +55,8 @@ class GetAnalysis extends Component
 
     public function updatedPackageId($value)
     {
-        $this->emptyForm();
         $this->questions = Package::find($this->package_id)->questions;
+        $this->emptyForm();
     }
 
     protected function emptyForm()
