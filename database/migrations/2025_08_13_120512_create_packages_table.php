@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('price')->nullable();
             $table->unsignedBigInteger('special_price')->nullable();
+            $table->string('image_path')->nullable();
             $table->text('prompt1')->nullable();
             $table->text('prompt2')->nullable();
             $table->string('meta_title')->nullable();
