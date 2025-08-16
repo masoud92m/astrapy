@@ -52,7 +52,7 @@
                                : 0;
                     @endphp
 
-                    <a href="#" class="rounded-2xl overflow-hidden glass hover:border-white/30 transition group">
+                    <a href="{{ route('package', $package->slug) }}" class="rounded-2xl overflow-hidden glass hover:border-white/30 transition group">
                         <div class="h-40 relative overflow-hidden">
                             @if($package->image_path)
                                 <img class="w-full h-full object-cover opacity-95 group-hover:opacity-100 transition"
