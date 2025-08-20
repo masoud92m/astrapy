@@ -56,9 +56,9 @@ class Modal extends Component
         $this->validate();
 
         session(['onboarding_data' => [
-            'name'    => $this->name,
-            'dob'          => $this->dob,
-            'gender'       => $this->gender,
+            'name' => $this->name,
+            'dob' => $this->dob,
+            'gender' => $this->gender,
             'relationship' => $this->relationship,
         ]]);
 
@@ -70,8 +70,8 @@ class Modal extends Component
     public function render()
     {
         return view('livewire.site.login.modal', [
-            'genders'        => Gender::cases(),
-            'relationships'  => Relationship::cases(),
+            'genders' => Gender::cases(),
+            'relationships' => Relationship::cases(),
         ]);
     }
 }
