@@ -1,6 +1,6 @@
 <div class="mt-3 min-h-[calc(100vh-200px)]" x-data="{submitting : false}">
     <form>
-        <div class="mb-3">
+        <div class="mb-3 sm:w-1/2">
             <label class="block mb-1 text-sm">پکیج</label>
             <select wire:model.change="package_id"
                     class="w-full rounded-sm border border-gray-700 focus:border-gray-500 focus:ring-0 p-2">
@@ -14,7 +14,7 @@
         @if($package_id)
 
             @foreach($questions as $question)
-                <div class="mb-3">
+                <div class="mb-3 sm:w-1/2">
                     <label class="block mb-1 text-sm">
                         {{ $question->content }}
                         @if($question->is_required)
@@ -55,7 +55,7 @@
             @endforeach
 
 
-            <div class="flex items-center justify-between pt-2">
+            <div class="flex items-center justify-between pt-2 sm:w-1/2">
                 <div class="flex items-center">
                     <button type="submit"
                             class="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer rounded-sm disabled:opacity-50 disabled:cursor-not-allowed"
