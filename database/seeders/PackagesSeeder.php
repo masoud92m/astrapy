@@ -11,8 +11,8 @@ class PackagesSeeder extends Seeder
 {
     public function run(): void
     {
-        Package::truncate();
-        PackageQuestion::truncate();
+//        Package::truncate();
+//        PackageQuestion::truncate();
 
         $items = [
             [
