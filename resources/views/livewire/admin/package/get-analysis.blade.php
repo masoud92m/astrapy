@@ -34,13 +34,14 @@
                             <input type="text"
                                    wire:model.defer="answers.{{ $question->id }}"
                                    data-jdp
+                                   data-jdp-max-date="today"
                                    class="w-full rounded-sm border border-gray-700 focus:border-gray-500 focus:ring-0 p-2">
                             @break
 
                         @case('select')
                             <select wire:model.defer="answers.{{ $question->id }}"
                                     class="w-full rounded-sm border border-gray-700 focus:border-gray-500 focus:ring-0 p-2">
-                                <option value="" disabled selected>انتخاب کن…</option>
+                                <option value="" selected>انتخاب کن…</option>
                                 @foreach($question->options as $option)
                                     <option value="{{ $option->value }}">{{ $option->value }}</option>
                                 @endforeach

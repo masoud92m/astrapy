@@ -62,16 +62,6 @@ class OpenAIHelper
         $prompt = [];
         $prompt[] = $package->prompt1;
         $prompt[] = 'اطلاعات اولیه موردنیاز:';
-        $info_items = [
-            'name' => 'نام',
-            'dob' => 'تاریخ تولد شمسی',
-            'gender' => 'جنسیت',
-            'relationship' => 'وضعیت رابطه',
-        ];
-
-        foreach ($info as $key => $value) {
-            $prompt[] = $info_items[$key] . ': ' . $value;
-        }
 
         foreach ($answers as $key => $value) {
             $prompt[] = $questions[$key] . ': ' . $value;

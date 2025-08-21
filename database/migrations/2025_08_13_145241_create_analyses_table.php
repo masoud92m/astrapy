@@ -16,10 +16,6 @@ return new class extends Migration
             $table->foreignId('package_id')->nullable()->constrained();
             $table->foreignId('user_id')->nullable()->constrained();
             $table->foreignId('causer_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->string('name')->nullable();
-            $table->unsignedTinyInteger('gender')->nullable();
-            $table->unsignedTinyInteger('relationship')->nullable();
-            $table->date('dob')->nullable();
             $table->text('prompt')->nullable();
             $table->text('analysis')->nullable();
             $table->timestamps();

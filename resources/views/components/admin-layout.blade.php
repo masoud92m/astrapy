@@ -54,7 +54,12 @@
     }
 </script>
 <script>
-    jalaliDatepicker.startWatch();
+    jalaliDatepicker.startWatch({
+        minDate: "attr",
+        maxDate: "attr",
+        time: false,
+    });
+
 </script>
 @stack('scripts')
 </body>
