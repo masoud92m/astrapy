@@ -17,5 +17,5 @@ Route::middleware(['guest'])->group(function () {
     Route::post('login/verity', [LoginController::class, 'verity'])->name('login.verity');
 });
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/{slug}', [\App\Http\Controllers\PackageController::class, 'show'])->name('package');
+//Route::get('/', [HomeController::class, 'index'])->name('home');
+//Route::get('/{slug}', [\App\Http\Controllers\PackageController::class, 'show'])->name('package');
