@@ -27,12 +27,7 @@ class GetAnalysis extends Component
 
     protected function rules()
     {
-        $rules = [
-            'name' => 'required|string|min:3',
-            'dob' => ['required', 'regex:/^1[3-4]\d{2}\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/'],
-            'gender' => 'required|integer|in:' . implode(',', Gender::values()),
-            'relationship' => 'required|integer|in:' . implode(',', Relationship::values()),
-        ];
+        $rules = [];
         foreach ($this->questions as $question) {
             $rules['answers.' . $question->id] = 'required';
             $this->messages['answers.' . $question->id . '.required'] = 'پاسخ به این سوال اجباری است.';
@@ -47,15 +42,12 @@ class GetAnalysis extends Component
 
     public function render()
     {
-        return view('livewire.admin.package.get-analysis', [
-            'genders' => Gender::cases(),
-            'relationships' => Relationship::cases(),
-        ]);
+        return view('livewire.admin.package.get-analysis');
     }
 
     public function updatedPackageId($value)
     {
-        $this->questions = Package::find($this->package_id)->questions;
+        $this->questions = Package::with('questions.options')->find($this->package_id)->questions;
         $this->emptyForm();
     }
 

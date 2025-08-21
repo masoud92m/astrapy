@@ -12,57 +12,48 @@
             @error('package_id') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
         </div>
         @if($package_id)
-            <div class="mb-3">
-                <label class="block mb-1 text-sm">نام و نام خانوادگی</label>
-                <input type="text" wire:model.defer="name"
-                       class="w-full rounded-sm border border-gray-700 focus:border-gray-500 focus:ring-0 p-2"
-                       placeholder="مثلاً: نگار محمدی">
-                @error('name') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
-                <div>
-                    <label class="block mb-1 text-sm">تاریخ تولد</label>
-                    <input type="text" wire:model.defer="dob"
-                           class="w-full rounded-sm border border-gray-700 focus:border-gray-500 focus:ring-0 p-2"
-                           data-jdp>
-                    @error('dob') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
-                </div>
-                <div>
-                    <label class="block mb-1 text-sm">جنسیت</label>
-                    <select wire:model.defer="gender"
-                            class="w-full rounded-sm border border-gray-700 focus:border-gray-500 focus:ring-0 p-2">
-                        <option value="" disabled selected>انتخاب کن…</option>
-                        @foreach($genders as $gender)
-                            <option value="{{ $gender->value }}">{{ $gender->label() }}</option>
-                        @endforeach
-                    </select>
-                    @error('gender') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label class="block mb-1 text-sm">وضعیت رابطه</label>
-                <select wire:model.defer="relationship"
-                        class="w-full rounded-sm border border-gray-700 focus:border-gray-500 focus:ring-0 p-2">
-                    <option value="" disabled selected>انتخاب کن…</option>
-                    @foreach($relationships as $status)
-                        <option value="{{ $status->value }}">{{ $status->label() }}</option>
-                    @endforeach
-                </select>
-                @error('relationship') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
-            </div>
 
             @foreach($questions as $question)
                 <div class="mb-3">
-                    <label class="block mb-1 text-sm">{{ $question->content }}</label>
-                    <input type="text" wire:model.defer="answers.{{ $question->id }}"
-                           class="w-full rounded-sm border border-gray-700 focus:border-gray-500 focus:ring-0 p-2"
-                           placeholder="">
-                    @error('answers.' . $question->id) <span
-                        class="text-red-400 text-xs">{{ $message }}</span> @enderror
+                    <label class="block mb-1 text-sm">
+                        {{ $question->content }}
+                        @if($question->is_required)
+                            <span class="text-red-500">*</span>
+                        @endif
+                    </label>
+
+                    @switch($question->type)
+                        @case('text')
+                            <input type="text"
+                                   wire:model.defer="answers.{{ $question->id }}"
+                                   class="w-full rounded-sm border border-gray-700 focus:border-gray-500 focus:ring-0 p-2"
+                                   placeholder="">
+                            @break
+
+                        @case('date')
+                            <input type="text"
+                                   wire:model.defer="answers.{{ $question->id }}"
+                                   data-jdp
+                                   class="w-full rounded-sm border border-gray-700 focus:border-gray-500 focus:ring-0 p-2">
+                            @break
+
+                        @case('select')
+                            <select wire:model.defer="answers.{{ $question->id }}"
+                                    class="w-full rounded-sm border border-gray-700 focus:border-gray-500 focus:ring-0 p-2">
+                                <option value="" disabled selected>انتخاب کن…</option>
+                                @foreach($question->options as $option)
+                                    <option value="{{ $option->value }}">{{ $option->value }}</option>
+                                @endforeach
+                            </select>
+                            @break
+                    @endswitch
+
+                    @error("answers.{$question->id}")
+                    <span class="text-red-400 text-xs">{{ $message }}</span>
+                    @enderror
                 </div>
             @endforeach
+
 
             <div class="flex items-center justify-between pt-2">
                 <div class="flex items-center">

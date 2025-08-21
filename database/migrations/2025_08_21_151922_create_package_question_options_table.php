@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('package_questions', function (Blueprint $table) {
+        Schema::create('package_question_options', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('package_id')->constrained();
-            $table->string('content');
-            $table->string('type')->default('text');
-            $table->boolean('is_required')->default(false);
+            $table->foreignId('package_question_id')->constrained()->onDelete('cascade');
+            $table->string('value');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('package_questions');
+        Schema::dropIfExists('package_question_options');
     }
 };
