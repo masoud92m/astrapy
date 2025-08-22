@@ -29,10 +29,6 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        $package_id = 2;
-        $package = Package::find($package_id);
-        $questions = $package->questions->pluck('content', 'id')->toArray();
-        dd($questions);
-
+        //
     }
 }

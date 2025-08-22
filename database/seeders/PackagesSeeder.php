@@ -119,17 +119,17 @@ class PackagesSeeder extends Seeder
                     [
                         'content' => 'نام کامل پارتنر (در صورت وجود)',
                         'type' => 'text',
-                        'is_required' => true,
+                        'is_required' => false,
                     ],
                     [
                         'content' => 'تاریخ تولد پارتنر (در صورت وجود)',
                         'type' => 'date',
-                        'is_required' => true,
+                        'is_required' => false,
                     ],
                     [
-                        'content' => 'جنسیت پارتنر',
+                        'content' => 'جنسیت پارتنر (در صورت وجود)',
                         'type' => 'select',
-                        'is_required' => true,
+                        'is_required' => false,
                         'options' =>
                             [
                                 'مذکر',
@@ -140,7 +140,7 @@ class PackagesSeeder extends Seeder
                     [
                         'content' => 'مدت زمان رابطه (در صورت وجود)',
                         'type' => 'text',
-                        'is_required' => true,
+                        'is_required' => false,
                     ],
                 ],
             ],

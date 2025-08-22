@@ -70,15 +70,17 @@ class OpenAIHelper
         $prompt[] = $package->prompt2;
         $content = implode("\n", $prompt);
         $messages = [
-            ['role' => 'system', 'content' => 'طبق توضیحاتی که در اماده میاد، میخوام یه متن برای برای یه پکیج آسترولوژی بنویسی، دقت کن این روانشناسی نیست به هیچ وجه، لطفا فقط جواب رو بنویس و هیچ توضیح اضافه در اول یا در آخر نده و هیچ سوالی هم نپرس'],
+            ['role' => 'system', 'content' => 'طبق توضیحاتی که در اماده میاد، میخوام یه متن برای برای یه پکیج آسترولوژی بنویسی، دقت کن این روانشناسی نیست به هیچ وجه، لطفا فقط جواب رو بنویس و هیچ توضیح اضافه در اول یا در آخر نده و هیچ سوالی هم نپرس، حتما از اموجی برای تاثیرگذاری بیشتر و فان بودن ماجرا استفاده کن، خوب فکر کن و جواب خوبی بده'],
             ['role' => 'user', 'content' => $content],
         ];
         $r =  self::chat($messages);
         if($r['status']){
+            $analysis = trim($r['data'], '` ');
+            $analysis = preg_replace('/^html\b\s*/i', '', $analysis);
             return [
                 'status' => true,
                 'data' => [
-                    'analysis' => $r['data'],
+                    'analysis' => $analysis,
                     'prompt' => $content,
                 ],
             ];

@@ -1,5 +1,5 @@
 {{-- resources/views/site/package.blade.php --}}
-<x-site-layout :title="'آستراپی | ' . $package->name">
+<x-site-layout :title="'آستروپینکی | ' . $package->name">
     @php
         $hasSpecial = !empty($package->special_price) && $package->special_price < $package->price;
         $off = $hasSpecial && $package->price > 0

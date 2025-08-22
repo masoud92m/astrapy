@@ -1,4 +1,4 @@
-@props(['title' => 'آستراپی'])
+@props(['title' => 'آستروپینکی'])
 
     <!DOCTYPE html>
 <html lang="fa" dir="rtl" class="dark">
@@ -22,7 +22,7 @@
             <span class="inline-block w-2 h-6 bg-white/10"></span>
             <span class="inline-block w-2 h-6 bg-yellow-500"></span>
             <span class="inline-block w-2 h-6 bg-gradient-to-b from-fuchsia-600 via-pink-500 to-amber-400"></span>
-            <h1 class="font-bold text-lg tracking-tight">آستراپی</h1>
+            <h1 class="font-bold text-lg tracking-tight">آستروپینکی</h1>
         </div>
         <nav class="hidden sm:flex items-center gap-6 text-sm text-gray-200">
             <a href="#packages" class="hover:text-white transition">پکیج‌ها</a>
@@ -40,7 +40,7 @@
 <footer id="contact" class="mt-auto border-t border-white/10 glass">
     <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-gray-200/90">
         <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p>© {{ date('Y') }} <a href="{{ route('home') }}" class="hover:underline">آستراپی</a></p>
+            <p>© {{ date('Y') }} <a href="{{ route('home') }}" class="hover:underline">آستروپینکی</a></p>
             <div class="text-xs text-gray-200/80">ساخته‌شده با ❤️ و کمی غبار ستاره</div>
         </div>
     </div>

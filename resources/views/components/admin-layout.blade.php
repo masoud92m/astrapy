@@ -35,7 +35,9 @@
 
     <div class="flex-1 flex flex-col min-h-screen">
         <div class="bg-white shadow p-4 flex justify-between items-center">
-            <button onclick="toggleSidebar()" class="bg-gray-800 hover:bg-gray-600 text-white px-4 py-2 rounded cursor-pointer">☰</button>
+            <button onclick="toggleSidebar()"
+                    class="bg-gray-800 hover:bg-gray-600 text-white px-4 py-2 rounded cursor-pointer">☰
+            </button>
             <div>
                 <a href="{{ route('admin.logout') }}" class="bg-blue-600 text-white px-4 py-1 rounded cursor-pointer">خروج</a>
             </div>

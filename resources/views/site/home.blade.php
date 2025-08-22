@@ -1,4 +1,4 @@
-<x-site-layout title="آستراپی | صفحه اصلی">
+<x-site-layout title="آستروپینکی | صفحه اصلی">
 
     <!-- Hero Section -->
     <section class="relative">
