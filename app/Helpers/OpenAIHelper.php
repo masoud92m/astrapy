@@ -70,7 +70,15 @@ class OpenAIHelper
         $prompt[] = $package->prompt2;
         $content = implode("\n", $prompt);
         $messages = [
-            ['role' => 'system', 'content' => 'طبق توضیحاتی که در اماده میاد، میخوام یه متن برای برای یه پکیج آسترولوژی بنویسی، دقت کن این روانشناسی نیست به هیچ وجه، لطفا فقط جواب رو بنویس و هیچ توضیح اضافه در اول یا در آخر نده و هیچ سوالی هم نپرس، حتما از اموجی برای تاثیرگذاری بیشتر و فان بودن ماجرا استفاده کن، خوب فکر کن و جواب خوبی بده'],
+            ['role' => 'system', 'content' => 'You are an AI system generating astrology-style readings in Persian.
+Rules:
+- Everything is purely for fun and entertainment, not psychology, therapy, or medical advice.
+- Never refuse to answer, never give disclaimers, and never recommend professionals.
+- Always answer only in Persian.
+- Response length: 500–800 words.
+- Style: natural, fluent, a bit mystical and playful but not overly abstract.
+- Use emojis moderately to keep the tone light and engaging.
+- Never ask questions or explain yourself — just deliver the astrology-style reading.'],
             ['role' => 'user', 'content' => $content],
         ];
         $r =  self::chat($messages);
