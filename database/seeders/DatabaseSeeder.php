@@ -41,8 +41,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(PermissionsSeeder::class);
-        $this->call(PackagesSeeder::class);
-
 
         foreach (User::all() as $user) {
             UserPermission::create([
@@ -50,5 +48,8 @@ class DatabaseSeeder extends Seeder
                 'permission_id' => 1,
             ]);
         }
+
+        $this->call(PackagesSeeder::class);
+        $this->call(GatewaySeeder::class);
     }
 }
