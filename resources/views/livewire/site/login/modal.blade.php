@@ -83,7 +83,7 @@
                 <!-- Buttons -->
                 <div class="flex items-center justify-between pt-4">
                     <button type="button"
-                            class="px-4 py-2 text-sm text-gray-300 hover:text-white transition"
+                            class="px-4 py-2 text-sm text-gray-300 hover:text-white transition cursor-pointer"
                             wire:click="skip">
                         بعداً تکمیل می‌کنم
                     </button>
