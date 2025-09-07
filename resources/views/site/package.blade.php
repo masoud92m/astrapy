@@ -121,8 +121,7 @@
         <div class="max-w-3xl mx-auto px-4">
             <h2 class="text-xl sm:text-2xl font-bold mb-4">ثبت سفارش</h2>
             <div class="rounded-2xl p-4 sm:p-6 bg-white/5 ring-1 ring-white/10">
-                {{-- ⛳ اینجا فرم شما قرار می‌گیرد. --}}
-                {{-- {!! $yourFormHtml !!} یا @livewire(...) --}}
+                @livewire('site.package.get-analysis', ['package_id' => $package->id])
             </div>
         </div>
     </section>
