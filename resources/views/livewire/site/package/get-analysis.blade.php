@@ -1,7 +1,7 @@
-<div class="mt-3 min-h-[calc(100vh-200px)]" x-data="{submitting : false}">
+<div class="mt-3" x-data="{submitting : false}">
     <form>
         @foreach($questions as $question)
-            <div class="mb-5 sm:w-1/2">
+            <div class="mb-5">
                 <label class="block mb-1 text-sm font-medium text-gray-200">
                     {{ $question->content }}
                     @if($question->is_required)
